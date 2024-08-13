@@ -1,0 +1,6 @@
+service:
+  nginx:
+
+  php-fpm:
+
+  mysql:
