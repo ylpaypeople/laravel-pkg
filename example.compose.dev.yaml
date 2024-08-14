@@ -1,0 +1,5 @@
+services:
+  composer:
+    build:
+      args:
+        PACKAGE_NAME: pay-people/access-control

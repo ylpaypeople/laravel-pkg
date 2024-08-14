@@ -17,8 +17,7 @@ services:
       context: .
       dockerfile: ./docker/composer/Dockerfile
       args:
-        PACKAGE_NAME: pay-people/access-control
-
+        PACKAGE_NAME: ${PACKAGE_NAME:?error}
     volumes:
       - laravel:/app
 
