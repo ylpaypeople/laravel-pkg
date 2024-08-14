@@ -1,5 +1,35 @@
-service:
-  nginx:
+services:
+  franken:
+    image: dunglas/frankenphp
+    ports:
+      - 443:443
+      - 80:80
 
-  php:
+    volumes:
+      - laravel:/app
 
+    depends_on:
+      composer:
+        condition: service_completed_successfully
+
+  composer:
+    build:
+      context: .
+      dockerfile: ./docker/composer/Dockerfile
+      args:
+        PACKAGE_NAME: pay-people/access-control
+
+    volumes:
+      - laravel:/app
+
+
+    develop:
+      watch:
+        - path: ./package
+          action: sync+restart
+          target: /package
+
+
+
+volumes:
+  laravel:
