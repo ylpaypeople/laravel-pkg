@@ -12,7 +12,7 @@ EOT
 RUN <<EOT
     echo ${PACKAGE_NAME}
     composer config repositories.package  '{ "type": "path", "url": "/package", "options": { "symlink": false } }'
-    composer require ${PACKAGE_NAME}:dev-main
+    composer require ${PACKAGE_NAME}
 EOT
 
 CMD composer reinstall ${PACKAGE_NAME}

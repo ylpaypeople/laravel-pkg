@@ -1,4 +1,27 @@
 services:
+
+  builder:
+    build:
+      context: .
+      dockerfile: ./docker/composer/Dockerfile
+      args:
+        PACKAGE_NAME: ${PACKAGE_NAME:?error}
+    volumes:
+      - laravel:/app
+
+    develop:
+      watch:
+        - path: ./package
+          action: sync+restart
+          target: /package
+
+#  tester:
+#    image:
+#
+#    depends_on:
+#      builder:
+#        condition: service_completed_successfully
+
   franken:
     image: dunglas/frankenphp
     ports:
@@ -9,24 +32,8 @@ services:
       - laravel:/app
 
     depends_on:
-      composer:
+      builder:
         condition: service_completed_successfully
-
-  composer:
-    build:
-      context: .
-      dockerfile: ./docker/composer/Dockerfile
-      args:
-        PACKAGE_NAME: ${PACKAGE_NAME:?error}
-    volumes:
-      - laravel:/app
-
-
-    develop:
-      watch:
-        - path: ./package
-          action: sync+restart
-          target: /package
 
 
 
