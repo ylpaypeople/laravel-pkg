@@ -11,13 +11,9 @@ RUN echo ${PACKAGE_PATH}
 
 COPY --from=package . /package
 
-RUN <<EOT
-    composer create-project laravel/laravel /app
-EOT
+RUN composer create-project laravel/laravel /app
 
-RUN <<EOT
-    composer config repositories.package  '{ "type": "path", "url": "/package", "options": { "symlink": false } }'
-    composer require ${PACKAGE_NAME}
-EOT
+RUN composer config repositories.package  '{ "type": "path", "url": "/package", "options": { "symlink": false } }'
+RUN composer require ${PACKAGE_NAME}
 
 CMD composer reinstall ${PACKAGE_NAME}
