@@ -3,7 +3,7 @@ FROM composer/composer
 ARG PACKAGE_NAME
 ENV PACKAGE_NAME=$PACKAGE_NAME
 
-COPY /package /package
+COPY --from=package . /package
 
 RUN <<EOT
     composer create-project laravel/laravel /app

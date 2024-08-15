@@ -3,6 +3,8 @@ services:
   builder:
     build:
       context: .
+      additional_contexts:
+        - package=${PACKAGE_PATH:?error}
       dockerfile: ./docker/composer/Dockerfile
       args:
         PACKAGE_NAME: ${PACKAGE_NAME:?error}
@@ -11,7 +13,7 @@ services:
 
     develop:
       watch:
-        - path: ./package
+        - path: ${PACKAGE_PATH:?error}
           action: sync+restart
           target: /package
 
