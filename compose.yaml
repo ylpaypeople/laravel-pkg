@@ -8,6 +8,7 @@ services:
       dockerfile: ./Builder.Dockerfile
       args:
         PACKAGE_NAME: ${PACKAGE_NAME:?error}
+        PACKAGE_PATH: ${PACKAGE_PATH:?error}
     volumes:
       - laravel:/app
 

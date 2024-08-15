@@ -3,6 +3,12 @@ FROM composer/composer
 ARG PACKAGE_NAME
 ENV PACKAGE_NAME=$PACKAGE_NAME
 
+ARG PACKAGE_PATH
+ENV PACKAGE_PATH=$PACKAGE_PATH
+
+RUN echo ${PACKAGE_NAME}
+RUN echo ${PACKAGE_PATH}
+
 COPY --from=package . /package
 
 RUN <<EOT
@@ -10,7 +16,6 @@ RUN <<EOT
 EOT
 
 RUN <<EOT
-    echo ${PACKAGE_NAME}
     composer config repositories.package  '{ "type": "path", "url": "/package", "options": { "symlink": false } }'
     composer require ${PACKAGE_NAME}
 EOT
