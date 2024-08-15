@@ -5,7 +5,7 @@ services:
       context: .
       additional_contexts:
         - package=${PACKAGE_PATH:?error}
-      dockerfile: ./docker/composer/Dockerfile
+      dockerfile: ./Builder.Dockerfile
       args:
         PACKAGE_NAME: ${PACKAGE_NAME:?error}
     volumes:
