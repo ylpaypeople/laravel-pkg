@@ -9,4 +9,9 @@ docker compose down -v
 
 ```
 
-# пакет хранится в папке package 
+# настройки в environment
+
+```ini
+PACKAGE_NAME="pay-people/access-control"
+PACKAGE_PATH="/home/uriy/www/pkg-access-control"
+```
